@@ -1,0 +1,44 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.container{
+    width:95%;
+    margin: auto
+}
+.row{
+    @apply flex flex-wrap py-8 items-center px-4;
+}
+.btn{
+    @apply  py-2  rounded-lg text-white mb-2 mt-2
+}
+.product:hover{
+    cursor: pointer;
+    box-shadow: 1px 1px 10px #4fa74f ;
+    
+}
+.btn.add-to-cart{
+    opacity: 0;
+    transition: 1s;
+}
+.product:hover .add-to-cart{
+    opacity: 1;
+    transform: translateY(0);
+
+}
+.category-img{
+    height: 200px;
+}
+
+.brand:hover{
+    box-shadow:  1px 1px 10px #4fa74f  ;
+    transition: 0.8s;
+
+}
+.bg-opacity-black{
+    background-color: rgba(0, 0, 0, 0.518);
+}
+.bg-footer{
+    background-color: rgba(131, 171, 183, 0.673);
+    ;
+}

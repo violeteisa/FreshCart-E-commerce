@@ -1,0 +1,25 @@
+.pagination{
+    display: flex;
+    align-items: center;
+
+    
+
+
+
+}
+.pagination li{
+    margin-inline: 10px;
+}
+.active{
+    background-color: #29dac5;
+    border-radius: 50%;
+    padding: 5px;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+display: flex;
+justify-content: center;
+align-items: center;
+
+
+}
