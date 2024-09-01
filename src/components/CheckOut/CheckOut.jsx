@@ -42,7 +42,7 @@ export default function CheckOut() {
       {isLoading ? (
         <LoadingScreen />
       ) : (
-        <div className="py-6 max-w-xl mx-auto">
+        <div className="py-12 max-w-xl mx-auto">
           <h2 className="text-teal-600 text-3xl font-bold my-6">Check Out</h2>
           <form onSubmit={formik.handleSubmit}>
             <div className="relative z-0 w-full mb-5 group">
