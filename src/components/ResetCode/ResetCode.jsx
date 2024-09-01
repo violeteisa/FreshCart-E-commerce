@@ -1,10 +1,8 @@
 import React from "react";
-import Style from "./ResetCode.module.css";
 import { useState, useContext } from "react";
-import { useEffect } from "react";
 import { useFormik } from "formik";
 import axios from "axios";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import * as yup from "yup";
 import { UserContext } from "../../Context/UserContext";
 import toast from "react-hot-toast";

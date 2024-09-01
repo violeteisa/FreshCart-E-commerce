@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import Style from "./Home.module.css";
 import RecentPeoducts from "../RecentPeoducts/RecentPeoducts";
 import CategoriesSlider from "../CategoriesSlider/CategoriesSlider";
 import MainSlider from "../MainSlider/MainSlider";
