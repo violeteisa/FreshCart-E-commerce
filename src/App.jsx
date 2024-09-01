@@ -76,14 +76,6 @@ function App() {
             </ProtectedRoute>
           ),
         },
-        {
-          path: "shippingAddress",
-          element: (
-            <ProtectedRoute>
-              <ShippingAddressCash />
-            </ProtectedRoute>
-          ),
-        },
         
         {
           path: "products",
