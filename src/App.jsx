@@ -24,8 +24,6 @@ import ResetCode from "./components/ResetCode/ResetCode";
 import NewPassword from "./components/NewPassword/NewPassword";
 import Wishlist from "./components/Wishlist/Wishlist";
 import WishlistContextProvider from "./Context/WishlistContext";
-import ShippingAddressCash from "./components/ShippingAddressCash/ShippingAddressCash";
-
 ReactQueryDevtools;
 function App() {
   let query = new QueryClient();
