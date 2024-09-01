@@ -6,6 +6,7 @@ import { CartContext } from "../../Context/CartContext";
 import toast from "react-hot-toast";
 import LoadingScreen from "../LoadingScreen/LoadingScreen";
 import { WishlistContext } from "../../Context/WishlistContext";
+import { Helmet } from "react-helmet";
 
 
 export default function ProductDetails() {
@@ -28,12 +29,14 @@ export default function ProductDetails() {
   useEffect(() => {
     const storedWishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
     setWishlistItems(storedWishlist);
+ 
   }, []);
   useEffect(() => {
     if (Wishlist && Wishlist.data) {
       const wishlistIds = Wishlist.data.map(item => item._id);
       setWishlistItems(wishlistIds);
       localStorage.setItem('wishlist', JSON.stringify(wishlistIds));
+ 
     }
   }, [Wishlist]);
 
@@ -44,6 +47,7 @@ export default function ProductDetails() {
       .then(({ data }) => {
         setProductDetails(data.data);
         setLoading(false)
+        
       })
       .catch((error) => {
         toast.error("Failed to load product details.");
@@ -101,6 +105,7 @@ export default function ProductDetails() {
   async function toggleWishlist(productId) {
     setLoading(true); 
     let newWishlist;
+  
     if (wishlistItems.includes(productId)) {
       let response = await deleteWishlistItem(productId);
       if (response.data.status === 'success') {
@@ -111,6 +116,7 @@ export default function ProductDetails() {
       }
     } else {
       let response = await addProductToWishlist(productId);
+      
       if (response.data.status === 'success') {
         newWishlist = [...wishlistItems, productId];
         toast.success(response.data.message, { duration: 1000, position: 'bottom-right' });
@@ -118,6 +124,7 @@ export default function ProductDetails() {
         toast.error(response.data.message, { duration: 1000, position: 'bottom-right' });
       }
     }
+
     setWishlist(newWishlist);
     setWishlistItems(newWishlist);
     localStorage.setItem('wishlist', JSON.stringify(newWishlist));
@@ -125,6 +132,10 @@ export default function ProductDetails() {
   }
   return (
     <>
+    <Helmet>
+
+    <title>Products Details</title> 
+    </Helmet>
       <div className="row">
         <div className="w-1/4">
           <Slider {...settings}>
@@ -152,7 +163,7 @@ export default function ProductDetails() {
                 {loading && currentProductId === productDetails?.id ? "Adding..." : "Add to Cart"}
               </button>
               <button
-                    onClick={() => toggleWishlist(product.id)}
+                    onClick={() => toggleWishlist(productDetails?.id)}
                   >
                     <i
                       className={`fa-solid fa-heart text-xl ps-2 ${
