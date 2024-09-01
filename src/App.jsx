@@ -24,6 +24,7 @@ import ResetCode from "./components/ResetCode/ResetCode";
 import NewPassword from "./components/NewPassword/NewPassword";
 import Wishlist from "./components/Wishlist/Wishlist";
 import WishlistContextProvider from "./Context/WishlistContext";
+
 ReactQueryDevtools;
 function App() {
   let query = new QueryClient();
@@ -74,6 +75,7 @@ function App() {
             </ProtectedRoute>
           ),
         },
+        
         
         {
           path: "products",

@@ -185,7 +185,7 @@ export default function Cart() {
               </div>
             </div>
             <div className="text-center py-6 md:py-14">
-              <Link to={"/ShippingAddress"}>
+              <Link to={"/checkout"}>
                 <button className="bg-teal-500 px-6 py-3 rounded text-white hover:shadow-2xl">
                   CheckOut Now
                 </button>
