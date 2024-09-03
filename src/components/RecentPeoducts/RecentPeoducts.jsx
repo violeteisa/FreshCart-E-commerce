@@ -10,9 +10,9 @@ import { PulseLoader } from "react-spinners";
 import Pagination from "../Pagination/Pagination";
 import { Helmet } from "react-helmet";
 
-
 export default function RecentProducts() {
   const [loading, setIsLoading] = useState(false);
+  const [Products, setProducts] = useState(null);
   const [wishlistItems, setWishlistItems] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   
@@ -21,8 +21,6 @@ export default function RecentProducts() {
 
   function getRecent(currentPage) {
     return axios.get(`https://ecommerce.routemisr.com/api/v1/products?page=${currentPage}`);
-  
-    
   }
 
   useEffect(() => {
@@ -39,12 +37,14 @@ export default function RecentProducts() {
   }, [Wishlist]);
 
   let { data, isError, error, isFetching, isLoading } = useQuery({
-    queryKey: ['recentProducts',currentPage],
-    queryFn:()=> getRecent(currentPage)
+    queryKey: ['recentProducts', currentPage],
+    queryFn: () => getRecent(currentPage)
   });
+
   if (isLoading) {
     return <div className="w-full py-8 flex justify-center"><PulseLoader /></div>;
   }
+
   if (isError) {
     return <div className="w-full py-8 flex justify-center"><h3>{error.message}</h3></div>;
   }
@@ -86,21 +86,46 @@ export default function RecentProducts() {
     localStorage.setItem('wishlist', JSON.stringify(newWishlist));
     setIsLoading(false); 
   }
- function handlePageChange({selected}){
-setCurrentPage(selected+1)
 
+  function handlePageChange({ selected }) {
+    setCurrentPage(selected + 1);
   }
 
-  
+  const handleSearch = (value) => {
+    if (value !== "") {
+      setProducts(
+        data.data.data.filter((x) =>
+          x.title.split(" ").slice(0, 2).join(" ").toLowerCase().includes(value.toLowerCase())
+        )
+      );
+    } else {
+      setProducts(null);
+    }
+  };
+
   return (
     <>
       <Helmet>
-    <title>Products</title> 
-  </Helmet>
+        <title>Products</title> 
+      </Helmet>
+      <div className="mt-24">
+        <label
+          htmlFor="large-input"
+          className="block mb-2 text-sm font-semibold  text-teal-500"
+        >
+          Search by product Name:
+        </label>
+        <input
+          onChange={(e) => handleSearch(e.target.value)}
+          type="text"
+          id="large-input"
+          className="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-base focus:ring-teal-600 focus:border-teal-600 dark:bg-stale-500 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-teal-600 dark:focus:border-teal-600"
+        />
+      </div>
       <h1 className="text-center text-5xl font-semibold text-teal-500 mt-16 pb-5">Products</h1>
       {loading && <LoadingScreen />}
       <div className="row">
-        {data?.data.data.map((product) => (
+        {(Products || data.data.data).map((product) => (
           <div className="md:w-1/4 sm:w-1/2 px-2" key={product.id}>
             <div className="product rounded-sm px-4 py-4">
               <Link to={`/productdetails/${product.id}/${product.category.name}`}>
@@ -138,12 +163,10 @@ setCurrentPage(selected+1)
         ))}
 
         <div className="flex justify-center mt-20 w-full p-3 bg-teal-500 shadow-xl rounded font-semibold text-white">
-        <Pagination
-        
-        
-        handlePageChange={handlePageChange}
-        pageCount={data?.data?.metadata?.numberOfPages}
-        />
+          <Pagination
+            handlePageChange={handlePageChange}
+            pageCount={data?.data?.metadata?.numberOfPages}
+          />
         </div>
       </div>
     </>

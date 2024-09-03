@@ -5,8 +5,8 @@ import amazonpay from "../../assets/images/R.png";
 export default function Footer() {
   return (
     <>
-      <div className="bg-footer  py-3 text-slate-800">
-        <div className=" container mx-auto px-5 max-w-screen-xl">
+         <div className="bg-footer py-3 text-slate-800 mt-auto">
+         <div className="container mx-auto px-5 max-w-screen-xl">
           <h3 className="text-2xl">Get The FreshCart App</h3>
           <p className="text-slate-900">
             We Will send You a link , open it on your phone to download the app.{" "}

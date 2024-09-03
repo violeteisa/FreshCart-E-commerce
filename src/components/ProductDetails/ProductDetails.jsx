@@ -25,6 +25,7 @@ export default function ProductDetails() {
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
+    arrows:false
   };
   useEffect(() => {
     const storedWishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
@@ -137,14 +138,14 @@ export default function ProductDetails() {
     <title>Products Details</title> 
     </Helmet>
       <div className="row">
-        <div className="w-1/4">
+        <div className="md:w-1/4 sm:w-full">
           <Slider {...settings}>
             {productDetails?.images.map((src, index) => (
               <img key={index} className="w-full" src={src} alt={productDetails?.title} />
             ))}
           </Slider>
         </div>
-        <div className="w-3/4">
+        <div className="md:w-3/4 sm:w-full">
           <div className="px-3">
             <h1 className="text-3xl mb-4 font-semibold text-gray-950">{productDetails?.title}</h1>
             <p className="text-gray-700 mb-4">{productDetails?.description}</p>
@@ -177,7 +178,7 @@ export default function ProductDetails() {
       <h2 className="font-semibold text-3xl">Related Products</h2>
       <div className="row">
         {relatedProduct.map((product) => (
-          <div className="w-1/6 px-2" key={product.id}>
+          <div className="md:w-1/4 sm:w-1/2 px-2" key={product.id}>
             <Link to={`/productdetails/${product.id}/${product.category.name}`}>
               <div className="product rounded-sm px-4 py-4">
                 <img src={product.imageCover} alt={product.title} />
